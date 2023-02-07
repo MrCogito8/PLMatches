@@ -20,10 +20,30 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        String code = "";
+        System.out.println("Please select league:\n1: Premier League\n2: Serie A\n3: Bundesliga");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String number = reader.readLine();
+
+        switch(number)
+        {
+            case "1":
+                code = "PL";
+                break;
+            case "2":
+                code = "SA";
+                break;
+            case "3":
+                code = "BL1";
+                break;
+            default:
+                System.out.println("Incorrect number was set!");
+        }
+
         HashMap<String, Integer> teamPosition = new HashMap<String, Integer>();
 
-        String API_URL = "https://api.football-data.org/v2/competitions/SA/standings";
-        //String API_URL = "https://api.football-data.org/v2/competitions/PL/standings";
+        //String API_URL = "https://api.football-data.org/v2/competitions/SA/standings";
+        String API_URL = "https://api.football-data.org/v2/competitions/"+code+"/standings";
         //String API_URL = "https://api.football-data.org/v2/competitions/BL1/standings";
 
         String response = sendGetRequest(API_URL);
@@ -45,17 +65,16 @@ public class Main {
 
         System.out.println("Provide match week number: ");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Reading data using readLine
-        String number;
+
 
 
 
         number = reader.readLine();
 
-        API_URL = "https://api.football-data.org/v2/competitions/SA/matches?matchday="+number;
-        //API_URL = "https://api.football-data.org/v2/competitions/2021/matches?matchday="+number;
+        //API_URL = "https://api.football-data.org/v2/competitions/SA/matches?matchday="+number;
+        API_URL = "https://api.football-data.org/v2/competitions/"+code+"/matches?matchday="+number;
         //https://api.football-data.org/v2/competitions/BL1/matches?matchday
         //API_URL = "https://api.football-data.org/v2/competitions/BL1/matches?matchday="+number;
 
